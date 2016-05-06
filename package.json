@@ -1,0 +1,55 @@
+{
+  "name": "html-linkify",
+  "description": "It converts HTML headers (h1, h2, h3, h4, h5 & h6) into links.",
+  "homepage": "https://github.com/Kikobeats/html-linkify",
+  "version": "0.0.0",
+  "main": "./index.js",
+  "author": {
+    "name": "Kiko Beats",
+    "email": "josefrancisco.verdu@gmail.com",
+    "url": "https://github.com/Kikobeats"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kikobeats/html-linkify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Kikobeats/html-linkify/issues"
+  },
+  "keywords": [
+    "html",
+    "link",
+    "linkify",
+    "markdown",
+    "titles"
+  ],
+  "devDependencies": {
+    "browserify": "latest",
+    "coffee-script": "latest",
+    "coffeeify": "latest",
+    "git-dirty": "latest",
+    "gulp": "latest",
+    "gulp-header": "latest",
+    "gulp-uglify": "latest",
+    "gulp-util": "latest",
+    "mocha": "latest",
+    "should": "latest",
+    "standard": "latest",
+    "vinyl-buffer": "latest",
+    "vinyl-source-stream": "latest"
+  },
+  "engines": {
+    "node": ">= 4"
+  },
+  "files": [
+    "dist/html-linkify.js",
+    "index.js"
+  ],
+  "scripts": {
+    "clean": "rm -rf node_modules",
+    "lint": "standard lib",
+    "pretest": "npm run lint",
+    "test": "mocha"
+  },
+  "license": "MIT"
+}

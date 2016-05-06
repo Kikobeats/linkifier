@@ -1,0 +1,51 @@
+*, ::before, ::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  -webkit-font-smoothing: antialiased;
+}
+
+#post-content {
+  padding: 1.5rem 4.5rem;
+}
+
+a {
+  color: #333333;
+  text-decoration: none;
+  border-bottom: 1px dotted;
+}
+
+h2 {
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: -1.5px;
+  color: rgba(0, 0, 0, 0.901961);
+  margin: 0px;
+  padding: 20px 0px 0px;
+}
+
+h2 > a {
+  color: #333333;
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.deep-link {
+  font-weight: bold;
+}
+
+
+.deep-link a:before {
+  display: inline-block;
+  content: "#";
+  margin-left: -30px;
+  width: 30px;
+  color: #fff;
+  transition: all 0.2s;
+}
+
+.deep-link a:hover::before {
+  color: rgba(0,0,0,0.8);
+}
