@@ -1,7 +1,7 @@
 {
-  "name": "html-linkify",
+  "name": "linkify",
   "description": "It converts HTML headers (h1, h2, h3, h4, h5 & h6) into links.",
-  "homepage": "https://github.com/Kikobeats/html-linkify",
+  "homepage": "https://github.com/Kikobeats/linkify",
   "version": "0.0.0",
   "main": "./index.js",
   "author": {
@@ -11,10 +11,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kikobeats/html-linkify.git"
+    "url": "git+https://github.com/kikobeats/linkify.git"
   },
   "bugs": {
-    "url": "https://github.com/Kikobeats/html-linkify/issues"
+    "url": "https://github.com/Kikobeats/linkify/issues"
   },
   "keywords": [
     "html",
@@ -36,7 +36,7 @@
     "node": ">= 4"
   },
   "files": [
-    "dist/html-linkify.js",
+    "dist/linkify.js",
     "index.js"
   ],
   "scripts": {
