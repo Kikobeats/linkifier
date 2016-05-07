@@ -1,6 +1,8 @@
 /* global $ */
 
 ;(function ($) {
+  'use strict'
+
   function dashify (str) {
     return str
       .replace(/[ \t]/g, '-')
@@ -8,16 +10,15 @@
       .toLowerCase()
   }
 
-  $.linkify = function linkify (opts) {
-    $(opts.selector).each(function () {
+  $.fn.linkify = function () {
+    this.each(function () {
       var el = $(this)
       var text = el.text()
       var dashText = dashify(text)
-
       el.html('')
       el.attr('id', dashText)
-      el.addClass(opts.addClass || 'deep-link')
+      el.addClass('deep-link')
       el.append('<a href=#' + dashText + '>' + text + '</a>')
     })
   }
-})($)
+})(window.jQuery || window.Zepto)

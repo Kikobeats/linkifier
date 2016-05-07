@@ -41,11 +41,7 @@ API and default values are:
 
 ```js
 var linkify = require('html-linkify')
-
-linkify({
-  selector: 'h2' // required,
-  addClass: 'deep-link' // optiona
-})
+$('h2').linkify() // provide selector to create link wrapper
 ```
 
 ## License

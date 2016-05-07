@@ -3,4 +3,4 @@
  * @version v0.0.0
  * @link    https://github.com/Kikobeats/html-linkify
  * @license MIT
- */!function(e){function a(e){return e.replace(/[ \t]/g,"-").replace(/[^-a-zA-Z0-9]/g,"").toLowerCase()}e.linkify=function(t){e(t.selector).each(function(){var n=e(this),i=n.text(),r=a(i);n.html(""),n.attr("id",r),n.addClass(t.addClass||"deep-link"),n.append("<a href=#"+r+">"+i+"</a>")})}}($);
+ */!function(t){"use strict";function e(t){return t.replace(/[ \t]/g,"-").replace(/[^-a-zA-Z0-9]/g,"").toLowerCase()}t.fn.linkify=function(){this.each(function(){var n=t(this),i=n.text(),a=e(i);n.html(""),n.attr("id",a),n.addClass("deep-link"),n.append("<a href=#"+a+">"+i+"</a>")})}}(window.jQuery||window.Zepto);
