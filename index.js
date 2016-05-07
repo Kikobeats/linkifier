@@ -21,4 +21,4 @@
       el.append('<a href=#' + dashText + '>' + text + '</a>')
     })
   }
-})(window.jQuery || window.Zepto)
+})($)
