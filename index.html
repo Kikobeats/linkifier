@@ -78,7 +78,11 @@
     </ul>
   </div>
   <script src="assets/jquery.js"></script>
-  <script src="dist/html-linkify.js" type="text/javascript" charset="utf-8"></script>
-  <script>var linkify = require('html-linkify')({selector: 'h2'})</script>
+  <script src="index.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    $.linkify({
+      selector: 'h2'
+    })
+  </script>
 </body>
 </html>

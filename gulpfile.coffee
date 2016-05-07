@@ -2,25 +2,20 @@
 
 # -- Dependencies --------------------------------------------------------------
 
-gulp       = require 'gulp'
-coffeeify  = require 'coffeeify'
-gutil      = require 'gulp-util'
-browserify = require 'browserify'
-header     = require 'gulp-header'
-uglify     = require 'gulp-uglify'
-buffer     = require 'vinyl-buffer'
-pkg        = require './package.json'
-source     = require 'vinyl-source-stream'
+gulp   = require 'gulp'
+header = require 'gulp-header'
+uglify = require 'gulp-uglify'
+concat = require 'gulp-concat'
+pkg    = require './package.json'
 
 # -- Files ---------------------------------------------------------------------
 
 src =
-  main: './index.js'
+  js: './index.js'
 
-module =
-  filename : "#{pkg.name}.js"
-  shortcut : "#{pkg.name}"
-  dist     : 'dist'
+dist =
+  name     : pkg.name
+  folder   : 'dist'
 
 banner = [
            "/**"
@@ -32,18 +27,13 @@ banner = [
 
 # -- Tasks ---------------------------------------------------------------------
 
-gulp.task 'browserify', ->
-  browserify extensions: ['.coffee', '.js']
-    .transform coffeeify, global: true
-    .require(src.main, { expose: module.shortcut})
-    .ignore('coffee-script')
-    .bundle().on('error', gutil.log)
-  .pipe source module.filename
-  .pipe buffer()
+gulp.task 'js', ->
+  gulp.src src.js
+  .pipe concat '' + dist.name + '.js'
   .pipe uglify()
   .pipe header banner, pkg: pkg
-  .pipe gulp.dest module.dist
-
-gulp.task 'default', ->
-  gulp.start 'browserify'
+  .pipe gulp.dest dist.folder
   return
+
+gulp.task 'build', ['js']
+gulp.task 'default', -> gulp.start ['build']
