@@ -10,7 +10,7 @@
       .toLowerCase()
   }
 
-  $.fn.linkify = function () {
+  $.fn.linkifier = function () {
     this.each(function () {
       var el = $(this)
       var text = el.text()
