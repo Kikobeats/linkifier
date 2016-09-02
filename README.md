@@ -21,27 +21,18 @@
 $ npm install linkifier --save
 ```
 
-If you want to use in the browser (powered by [Browserify](http://browserify.org/)):
-
-```bash
-$ bower install linkifier --save
-```
-
-and later link in your HTML:
-
-```html
-<script src="bower_components/linkifier/dist/linkifier.js"></script>
-```
-
 ## Usage
 
-**Note:** You need to use a DOM Selector.
-
-API and default values are:
+### Vanilla
 
 ```js
-var linkifier = require('linkifier')
-$('h2').linkifier() // provide selector to create link wrapper
+linkifier(document.getElementsByTagName('h2')
+```
+
+### jQuery
+
+```js
+$('h2').linkifier()
 ```
 
 ## License

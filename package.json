@@ -38,7 +38,7 @@
     "mocha": "latest",
     "should": "latest",
     "standard": "latest",
-    "vinyl-source-buffer": "~1.1.1"
+    "vinyl-source-buffer": "latest"
   },
   "files": [
     "dist"

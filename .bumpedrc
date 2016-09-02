@@ -13,7 +13,7 @@ plugins:
 
     'Compiling browser version':
       plugin: 'bumped-terminal'
-      command: 'gulp'
+      command: 'gulp build'
 
     'Generating CHANGELOG file':
       plugin: 'bumped-changelog'
