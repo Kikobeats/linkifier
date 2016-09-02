@@ -2,11 +2,11 @@
   "name": "linkifier",
   "description": "It converts HTML headers (h1, h2, h3, h4, h5 & h6) into links.",
   "homepage": "https://github.com/Kikobeats/linkifier",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "author": {
-    "name": "Kiko Beats",
     "email": "josefrancisco.verdu@gmail.com",
+    "name": "Kiko Beats",
     "url": "https://github.com/Kikobeats"
   },
   "repository": {

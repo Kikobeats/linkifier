@@ -1,3 +1,12 @@
+<a name="1.0.1"></a>
+## 1.0.1 (2016-09-02)
+
+* Extend docs ([5389c0c](https://github.com/kikobeats/linkifier/commit/5389c0c))
+* Remove bower ([c18c74b](https://github.com/kikobeats/linkifier/commit/c18c74b))
+* Split build into vanilla and jquery plugin ([a7e90f9](https://github.com/kikobeats/linkifier/commit/a7e90f9))
+
+
+
 <a name="1.0.0"></a>
 # 1.0.0 (2016-06-25)
 
