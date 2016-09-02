@@ -26,7 +26,7 @@ $ npm install linkifier --save
 ### Vanilla
 
 ```js
-linkifier(document.getElementsByTagName('h2')
+linkifier(document.getElementsByTagName('h2'))
 ```
 
 ### jQuery
@@ -34,6 +34,26 @@ linkifier(document.getElementsByTagName('h2')
 ```js
 $('h2').linkifier()
 ```
+
+## API
+
+### linkifier(<elements>, [opts])
+
+#### element
+
+*Required*<br>
+Type: `object`
+
+Collection of Node Elements to wrap into links.
+
+#### opts
+
+##### class
+
+Type: `string`<br>
+Default: `'deep-link'`
+
+A class to attach with the link wrapper.
 
 ## License
 
