@@ -2,16 +2,26 @@
 
 # -- Dependencies --------------------------------------------------------------
 
-gulp   = require 'gulp'
-header = require 'gulp-header'
-uglify = require 'gulp-uglify'
-concat = require 'gulp-concat'
-pkg    = require './package.json'
+gulp        = require 'gulp'
+header      = require 'gulp-header'
+uglify      = require 'gulp-uglify'
+concat      = require 'gulp-concat'
+browserify  = require 'browserify'
+gutil       = require 'gulp-util'
+pkg         = require './package.json'
+source      = require 'vinyl-source-buffer'
+browserSync = require 'browser-sync'
+collapse    = require 'bundle-collapser'
+reload      = browserSync.reload
+
+PORT =
+  BROWSERSYNC: 3000
 
 # -- Files ---------------------------------------------------------------------
 
 src =
-  js: './index.js'
+  vanilla : './src/linkifier.js'
+  jquery  : './src/linkifier.jquery.js'
 
 dist =
   name     : pkg.name
@@ -27,13 +37,29 @@ banner = [
 
 # -- Tasks ---------------------------------------------------------------------
 
-gulp.task 'js', ->
-  gulp.src src.js
-  .pipe concat '' + dist.name + '.js'
+gulp.task 'vanilla', ->
+  browserify(src.vanilla, {standalone: 'linkifier'})
+    .bundle()
+  .pipe source 'linkifier.js'
   .pipe uglify()
   .pipe header banner, pkg: pkg
   .pipe gulp.dest dist.folder
-  return
 
-gulp.task 'build', ['js']
-gulp.task 'default', -> gulp.start ['build']
+gulp.task 'jquery', ->
+  gulp.src src.jquery
+  .pipe concat "#{dist.name}.jquery.js"
+  .pipe uglify()
+  .pipe header banner, pkg: pkg
+  .pipe gulp.dest dist.folder
+
+
+gulp.task 'server', ->
+  browserSync.init
+    server: baseDir: './'
+    open: false
+
+gulp.task 'build', ['vanilla', 'jquery']
+
+gulp.task 'default', ->
+  gulp.start ['build', 'server']
+  gulp.watch './src/**', ['build', reload]

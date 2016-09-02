@@ -24,16 +24,24 @@
     "titles"
   ],
   "devDependencies": {
+    "browser-sync": "latest",
+    "browserify": "latest",
+    "bundle-collapser": "latest",
+    "coffee-script": "latest",
+    "dom101": "latest",
     "git-dirty": "latest",
     "gulp": "latest",
+    "gulp-concat": "latest",
     "gulp-header": "latest",
     "gulp-uglify": "latest",
+    "gulp-util": "latest",
     "mocha": "latest",
     "should": "latest",
-    "standard": "latest"
+    "standard": "latest",
+    "vinyl-source-buffer": "~1.1.1"
   },
   "files": [
-    "dist/linkifier.js"
+    "dist"
   ],
   "scripts": {
     "clean": "rm -rf node_modules",

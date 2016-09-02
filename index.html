@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>linkifier</title>
+  </head>
+  <body>
+    <div id="post-content" class="post tag-nodejs tag-javascript">
+      <blockquote>
+        <p>"Streams in node are one of the rare occasions when doing something the fast way is actually easier. SO USE THEM. not since bash has streaming been introduced into a high level language as nicely as it is in node." </p>
+      </blockquote>
+      <p>– <a href="https://twitter.com/dominictarr">@dominictarr</a> in his <a href="https://gist.github.com/dominictarr/2401787">high level node style guide</a>.</p>
+      <h2>General</h2>
+      <ul>
+        <li><p>Streams emits <a href="https://nodejs.org/api/events.html">Events</a>, the native observer pattern of NodeJS.</p></li>
+        <li><p>At this moment exists 3 iterations of the Stream implementation that depend of your version of node/iojs.</p></li>
+        <li><p>Instead of use the native API (that depend of your node version) better use <a href="https://github.com/nodejs/readable-stream">readable-stream</a> or <a href="https://github.com/rvagg/through2">through2</a>. Both are backward compatibility and works fine in browser build. (this last is more lightweight because just expose a Duplex Stream).</p></li>
+        <li><p><code>.pipe()</code> is just a function that takes a readable source stream and hooks the output to a destination writable stream (as UNIX commands):</p></li>
+      </ul>
+        <pre class=" language-js"><code class=" language-js">tweetStream<span class="token punctuation">.</span><span class="token function">pipe</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span>stdout<span class="token punctuation">)</span>
+    </code></pre>
+    <ul>
+      <li><p>Using <code>.pipe()</code> has other benefits too, like handling backpressure automatically so that node won't buffer chunks into memory needlessly when the remote client is on a really slow or high-latency connection.</p></li>
+      <li><p>We have 4 types of Streams: <a href="https://nodejs.org/api/stream.html#stream_duplex">Duplex</a>, <a href="https://nodejs.org/api/stream.html#stream_readable">Readable</a>, <a href="https://nodejs.org/api/stream.html#stream_transform">Transform</a> and <a href="https://nodejs.org/api/stream.html#stream_writable">Writable</a>.</p></li>
+      <li><p>A good library that collect stream utilities are <a href="https://github.com/maxogden/mississippi">mississippi</a>.</p></li>
+      <li><p>You can implement a <a href="https://gist.github.com/Kikobeats/d48f42ebf81fb5b2414e">Stream using inheritance or composition</a>.</p></li>
+    </ul>
+    <h2>Readable</h2>
+    <ul>
+      <li><p>For emit chunks of data you need to create a object that implement the <a href="https://nodejs.org/api/stream.html#stream_readable_read_size_1">._read</a> method.</p></li>
+      <li><p>It emits <code>data</code> events each time they get a <em>chunk</em> of data. From the implementation this is synonymous of <code>this.push(data)</code>.</p></li>
+      <li><p>It emits <code>end</code> when it has no more data <code>this.push(null).</code></p></li>
+      <li><p>When you are using a Readable Stream you can use <code>resume()</code> and <code>pause()</code> methods to control the data flow of the stream.</p></li>
+    </ul>
+    <h2>Writable</h2>
+    <ul>
+      <li><p>For emit chunks of data you need to create a object that implement the <a href="https://nodejs.org/api/stream.html#stream_writable_write_chunk_encoding_callback_1">._write</a> method.</p></li>
+      <li><p><code>.end</code> to close the stream and also you can pass the last chunk to <code>.write</code>.</p></li>
+      <li><p>Just provide the callback if you want to wait, but the order of the successive calls is guaranteed. </p></li>
+      <li><p><code>finish</code> event is emitted when the <code>end()</code> method has been called, and all data has been flushed to the underlying system.</p></li>
+    </ul>
+    <h2>Duplex</h2>
+    <ul>
+      <li><p>A <em>duplex</em> stream is one that is both Readable and Writable, such as a TCP socket connection.</p></li>
+      <li><p>It was implemented in the most recent node version but you can use <a href="https://github.com/rvagg/through2">through2</a>.</p></li>
+    </ul>
+    <h2>FD Streams</h2>
+    <ul>
+      <li><p>It's a special type of streams because interact with the filesystem.</p></li>
+      <li><p>uses <code>open</code> event to control the file state of the <code>fs.ReadStream</code>/<code>fs.WriteStream</code> streams.</p></li>
+    </ul>
+    <h2>Child Process</h2>
+    <ul>
+      <li><p>Also it's an especial kind of streams. They particularry fire <code>exit</code> event that is different from <code>close</code>.</p></li>
+      <li><p>It uses <code>stdio</code> to setup stream communication between the child_process and where the output have to be write/read (by default <code>stdin</code>, <code>stdout</code> and <code>stderr</code> that are align with UNIX standard streams).</p></li>
+    </ul>
+    <h2>What about Callback</h2>
+    <ul>
+      <li><p>You can convert whatever stream interface into a callback. See my <a href="https://github.com/Kikobeats/stream-callback#stream-callback">stream-callback</a> library that makes easy this conversion.</p></li>
+      <li><p>It's also possible transform an async callback function into a stream interface. You need to be sure to handle correctly the backpressure of the stream. In my experience in this area I use <a href="https://github.com/hughsk/from2">from2</a>. Check <a href="https://github.com/Kikobeats/fetch-timeline">fetch-timeline</a> or <a href="https://github.com/kikobeats/totalwind-api">totalwind-api</a> as examples.</p></li>
+    </ul>
+    <h2>Bonus Extra</h2>
+    <p>Interested libraries to use with streams are:</p>
+    <ul>
+      <li><a href="https://www.npmjs.com/package/progress-stream">progress-stream</a>, read the progress of a stream.</li>
+      <li><a href="https://github.com/mcollina/throughv">throughv</a>, stream.Transform with parallel chunk processing.</li>
+      <li><a href="https://github.com/substack/emit-stream">emit-stream</a>, turn event emitters into streams and streams into event emitters.</li>
+      <li><a href="https://github.com/mafintosh/pretty-stream">pretty-stream</a>, format a stream to make it more human readable.</li>
+      <li><a href="https://github.com/kevva/squeak">squeak</a>, a tiny stream log.</li>
+      <li><a href="https://github.com/substack/hyperquest">hyperquest</a>, make streaming http requests.</li>
+    </ul>
+    <h2>Bibliography</h2>
+    <ul>
+      <li><a href="http://maxogden.com/node-streams.html">Streams @ Max Ogden</a></li>
+      <li><a href="https://github.com/substack/stream-handbook">Stream Handbook @ Substack</a></li>
+      <li><a href="https://r.va.gg/2014/06/why-i-dont-use-nodes-core-stream-module.html">Why I don't use Node's core 'stream' module @ rvagg</a></li>
+    </ul>
+  </div>
+  <!-- <script src="assets/jquery.js"></script> -->
+  <script src="dist/linkifier.js" type="text/javascript" charset="utf-8"></script>
+  <script>linkifier(document.getElementsByTagName('h2'))</script>
+</body>
+</html>
