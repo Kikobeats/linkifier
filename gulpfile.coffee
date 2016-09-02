@@ -11,7 +11,7 @@ gutil       = require 'gulp-util'
 pkg         = require './package.json'
 source      = require 'vinyl-source-buffer'
 browserSync = require 'browser-sync'
-collapse    = require 'bundle-collapser'
+collapse    = require 'bundle-collapser/plugin'
 reload      = browserSync.reload
 
 PORT =
@@ -39,6 +39,7 @@ banner = [
 
 gulp.task 'vanilla', ->
   browserify(src.vanilla, {standalone: 'linkifier'})
+    .plugin(collapse)
     .bundle()
   .pipe source 'linkifier.js'
   .pipe uglify()
@@ -47,6 +48,7 @@ gulp.task 'vanilla', ->
 
 gulp.task 'jquery', ->
   browserify(src.jquery)
+    .plugin(collapse)
     .bundle()
   .pipe source 'linkifier.jquery.js'
   .pipe uglify()
