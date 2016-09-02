@@ -1,9 +1,12 @@
 var addClass = require('dom101/add-class')
+var DEFAULTS = require('./defaults')
 var getText = require('dom101/text')
 var dashify = require('./dashify')
 var each = require('dom101/each')
 
-function linkifier (elements) {
+function linkifier (elements, opts) {
+  opts = Object.assign(DEFAULTS, opts)
+
   each(elements, function (el) {
     var text = getText(el)
     var dashText = dashify(text)
@@ -11,7 +14,7 @@ function linkifier (elements) {
     el.innerHTML = ''
     el.setAttribute('id', dashText)
     el.setAttribute('id', dashText)
-    addClass(el, 'deep-link')
+    addClass(el, opts.class)
 
     var child = document.createElement('a')
     child.innerHTML = text

@@ -1,24 +1,24 @@
 /* global $ */
 
+var dashify = require('./dashify')
+var DEFAULTS = require('./defaults')
+
 ;(function ($) {
   'use strict'
 
-  function dashify (str) {
-    return str
-      .replace(/[ \t]/g, '-')
-      .replace(/[^-a-zA-Z0-9]/g, '')
-      .toLowerCase()
-  }
+  function linkifier (opts) {
+    opts = $.extend(DEFAULTS, opts)
 
-  $.fn.linkifier = function () {
     this.each(function () {
       var el = $(this)
       var text = el.text()
       var dashText = dashify(text)
       el.html('')
       el.attr('id', dashText)
-      el.addClass('deep-link')
+      el.addClass(opts.class)
       el.append('<a href=#' + dashText + '>' + text + '</a>')
     })
   }
+
+  $.fn.linkifier = linkifier
 })($)

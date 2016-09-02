@@ -46,12 +46,12 @@ gulp.task 'vanilla', ->
   .pipe gulp.dest dist.folder
 
 gulp.task 'jquery', ->
-  gulp.src src.jquery
-  .pipe concat "#{dist.name}.jquery.js"
+  browserify(src.jquery)
+    .bundle()
+  .pipe source 'linkifier.jquery.js'
   .pipe uglify()
   .pipe header banner, pkg: pkg
   .pipe gulp.dest dist.folder
-
 
 gulp.task 'server', ->
   browserSync.init
