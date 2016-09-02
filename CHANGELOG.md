@@ -1,3 +1,12 @@
+<a name="1.0.2"></a>
+## 1.0.2 (2016-09-02)
+
+* Add defaults docs ([9c66786](https://github.com/kikobeats/linkifier/commit/9c66786))
+* bundle-collapser for save extra size ([6003a1a](https://github.com/kikobeats/linkifier/commit/6003a1a))
+* Rebuild jquery version using browserify ([600c7f3](https://github.com/kikobeats/linkifier/commit/600c7f3))
+
+
+
 <a name="1.0.1"></a>
 ## 1.0.1 (2016-09-02)
 

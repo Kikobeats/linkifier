@@ -1,6 +1,6 @@
 /**
  * linkifier - It converts HTML headers (h1, h2, h3, h4, h5 & h6) into links.
- * @version v1.0.1
+ * @version v1.0.2
  * @link    https://github.com/Kikobeats/linkifier
  * @license MIT
- */var dashify=require("./dashify"),DEFAULTS=require("./defaults");!function(i){"use strict";function a(a){a=i.extend(DEFAULTS,a),this.each(function(){var t=i(this),e=t.text(),s=dashify(e);t.html(""),t.attr("id",s),t.addClass(a.class),t.append("<a href=#"+s+">"+e+"</a>")})}i.fn.linkifier=a}($);
+ */!function r(e,t,n){function i(u,f){if(!t[u]){if(!e[u]){var a="function"==typeof require&&require;if(!f&&a)return a(u,!0);if(o)return o(u,!0);var c=new Error("Cannot find module '"+u+"'");throw c.code="MODULE_NOT_FOUND",c}var s=t[u]={exports:{}};e[u][0].call(s.exports,function(r){var t=e[u][1][r];return i(t?t:r)},s,s.exports,r,e,t,n)}return t[u].exports}for(var o="function"==typeof require&&require,u=0;u<n.length;u++)i(n[u]);return i}({1:[function(r,e,t){function n(r){return r.replace(/[ \t]/g,"-").replace(/[^-a-zA-Z0-9]/g,"").toLowerCase()}e.exports=n},{}],2:[function(r,e,t){e.exports={class:"deep-link"}},{}],3:[function(r,e,t){var n=r(1),i=r(2);!function(r){"use strict";function e(e){e=r.extend(i,e),this.each(function(){var t=r(this),i=t.text(),o=n(i);t.html(""),t.attr("id",o),t.addClass(e.class),t.append("<a href=#"+o+">"+i+"</a>")})}r.fn.linkifier=e}($)},{1:1,2:2}]},{},[3]);
