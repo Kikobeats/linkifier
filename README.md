@@ -1,5 +1,7 @@
 # linkifier
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Kikobeats/linkifier.svg)](https://greenkeeper.io/)
+
 <p align="center">
   <br>
   <img src="demo.gif" alt="linkifier">
